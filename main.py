@@ -3,9 +3,10 @@ from save_releases_to_csv import save_releases_to_csv
 from plot_release_timeline import plot_release_timeline
 from calculate_release_intervals import calculate_release_intervals, analyze_release_intervals
 from plot_release_intervals import plot_release_intervals
+from count_vscode_contributors import get_top_contributors
+from plot_vscode_contributors import plot_top_contributors
 
-
-def analyse_vscode_releases(owner='microsoft', repo='vscode'):
+def analyse_vscode_releases(owner='microsoft', repo='vscode',branch='main'):
     releases = fetch_vscode_releases(owner, repo)
 
     if not releases:
@@ -21,6 +22,9 @@ def analyse_vscode_releases(owner='microsoft', repo='vscode'):
 
     plot_release_intervals(intervals)
 
-
+    top_contributors = get_top_contributors(owner, repo)
+    plot_top_contributors(top_contributors)
+   
+    
 if __name__ == "__main__":
     analyse_vscode_releases()
